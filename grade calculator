@@ -1,0 +1,34 @@
+def main():
+    while True:
+        try:
+            java = float(input("Java Programming Score: "))
+            c_prog = float(input("C Programming Score: "))
+            db = float(input("Database Handling Score: "))
+        except ValueError:
+            print("Please enter valid numbers.")
+            continue
+
+        if not (0 <= java <= 100 and 0 <= c_prog <= 100 and 0 <= db <= 100):
+            print("Scores must be between 0 and 100.")
+            continue
+
+        average = (java + c_prog + db) / 3
+
+        if 90 <= average <= 100:
+            grade, reason = "A", "between 90 and 100"
+        elif 80 <= average < 90:
+            grade, reason = "B", "between 80 and 89"
+        elif 75 <= average < 80:
+            grade, reason = "C", "between 75 and 79"
+        else:
+            grade, reason = "F", "below 75"
+
+        print(f"\nAverage: {average:.2f}   |   Grade: {grade} because the average is {reason}")
+
+        choice = input("\nDo you want to continue? (YES/NO): ").strip().upper()
+        if choice == "NO":
+            print("Program terminated. Thank you!")
+            break
+
+if __name__ == "__main__":
+    main()
