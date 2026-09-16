@@ -1,0 +1,19 @@
+def main():
+    try:
+        item1 = float(input("Enter cost of item 1: "))
+        item2 = float(input("Enter cost of item 2: "))
+        payment = float(input("Enter your payment amount: "))
+        
+        total_cost = item1 + item2
+        
+        if payment < total_cost:
+            amount_owed = total_cost - payment
+            print(f"You still owe: ${amount_owed:.2f}")
+        else:
+            change = payment - total_cost
+            print(f"Thank you for your payment! Your change is: ${change:.2f}")
+    except ValueError:
+        print("Invalid input. Please enter numeric values.")
+
+if __name__ == "__main__":
+    main()
