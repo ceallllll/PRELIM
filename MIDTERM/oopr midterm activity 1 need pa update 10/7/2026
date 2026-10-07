@@ -1,0 +1,287 @@
+package com.mycompany.main;
+
+import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        char continueChoice;
+
+        do {
+            System.out.println("Choose the program you want to run");
+            System.out.println("Number 1");
+            System.out.println("Number 2");
+            System.out.println("Number 3");
+            System.out.println("Number 4");
+            System.out.println("Number 5");
+            System.out.println("Number 6");
+            System.out.println("Number 7"); 
+            System.out.print("Enter number: ");
+            int choice = input.nextInt();
+
+            if (choice == 1) {
+                // Program 1: Read 10 real numbers into an array
+                double[] numbers = new double[10];
+                System.out.println("Enter 10 real numbers (negative and positive):");
+                for (int i = 0; i < 10; i++) {
+                    numbers[i] = input.nextDouble();
+                }
+
+                // Loop 1: Find the sum and average of positive numbers
+                double sum = 0;
+                int positiveCount = 0;
+                for (int i = 0; i < 10; i++) {
+                    if (numbers[i] > 0) {
+                        sum += numbers[i];
+                        positiveCount++;
+                    }
+                }
+                double average = (positiveCount > 0) ? sum / positiveCount : 0;
+                System.out.println("Sum of positive numbers: " + sum);
+                System.out.println("Average of positive numbers: " + average);
+
+                // Loop 2: Count negative numbers
+                int negativeCount = 0;
+                for (int i = 0; i < 10; i++) {
+                    if (numbers[i] < 0) {
+                        negativeCount++;
+                    }
+                }
+                System.out.println("Negative numbers count: " + negativeCount);
+
+                // Loop 3: Find the minimum value
+                double min = numbers[0];
+                for (int i = 1; i < 10; i++) {
+                    if (numbers[i] < min) {
+                        min = numbers[i];
+                    }
+                }
+                System.out.println("Minimum value: " + min);
+
+            } else if (choice == 2) {
+                // Program 2: Read 8 integer numbers into an array
+                int[] numbers = new int[8];
+                System.out.println("Enter 8 integer numbers:");
+                for (int i = 0; i < 8; i++) {
+                    numbers[i] = input.nextInt();
+                }
+
+                // Remove duplicate elements
+                int uniqueCount = 0;
+                int[] uniqueArr = new int[8];
+                for (int i = 0; i < 8; i++) {
+                    boolean isDuplicate = false;
+                    for (int j = 0; j < uniqueCount; j++) {
+                        if (numbers[i] == uniqueArr[j]) {
+                            isDuplicate = true;
+                            break;
+                        }
+                    }
+                    if (!isDuplicate) {
+                        uniqueArr[uniqueCount] = numbers[i];
+                        uniqueCount++;
+                    }
+                }
+
+                System.out.print("Array after removing duplicates: ");
+                for (int i = 0; i < uniqueCount; i++) {
+                    System.out.print(uniqueArr[i] + " ");
+                }
+                System.out.println();
+
+                // Sort unique elements using bubble sort
+                for (int i = 0; i < uniqueCount - 1; i++) {
+                    for (int j = 0; j < uniqueCount - i - 1; j++) {
+                        if (uniqueArr[j] > uniqueArr[j + 1]) {
+                            int temp = uniqueArr[j];
+                            uniqueArr[j] = uniqueArr[j + 1];
+                            uniqueArr[j + 1] = temp;
+                        }
+                    }
+                }
+
+                if (uniqueCount >= 2) {
+                    System.out.println("Second smallest: " + uniqueArr[1]);
+                    System.out.println("Second largest: " + uniqueArr[uniqueCount - 2]);
+                } else {
+                    System.out.println("Not enough unique elements to find second values.");
+                }
+
+            } else if (choice == 3) {
+                // Program 3: Delete an element from a specific position
+                int[] arr = new int[5];
+                System.out.print("Enter Data in Array: ");
+                for (int i = 0; i < 5; i++) {
+                    arr[i] = input.nextInt();
+                }
+
+                System.out.print("Stored Data in Array: ");
+                for (int i = 0; i < 5; i++) {
+                    System.out.print(arr[i] + " ");
+                }
+                System.out.println();
+
+                System.out.print("Enter poss. of Element to Delete: ");
+                int pos = input.nextInt();
+
+                System.out.print("New data in Array: ");
+                for (int i = 0; i < 5; i++) {
+                    if (i != pos) {
+                        System.out.print(arr[i] + " ");
+                    }
+                }
+                System.out.println();
+
+            } else if (choice == 4) {
+                // Program 4: Find even elements and odd elements in an array
+                System.out.print("Enter Size of Array : ");
+                int size = input.nextInt();
+                int[] arr = new int[size];
+
+                System.out.println("Enter any " + size + " elements in Array:");
+                for (int i = 0; i < size; i++) {
+                    arr[i] = input.nextInt();
+                }
+
+                System.out.print("Even Elements: ");
+                for (int i = 0; i < size; i++) {
+                    if (arr[i] % 2 == 0) {
+                        System.out.print(arr[i] + " ");
+                    }
+                }
+                System.out.println();
+
+                System.out.print("Odd Elements: ");
+                for (int i = 0; i < size; i++) {
+                    if (arr[i] % 2 != 0) {
+                        System.out.print(arr[i] + " ");
+                    }
+                }
+                System.out.println();
+
+            } else if (choice == 5) {
+                // Program 5: Dynamic loop character layout tree construction
+                for (int i = 1; i <= 4; i++) {
+                    for (int j = 1; j <= i; j++) {
+                        if (j == 1) {
+                            System.out.print("*");
+                        } else {
+                            System.out.print("A*");
+                        }
+                    }
+                    System.out.println();
+                }
+
+            } else if (choice == 6) {
+                // Program 6: University Student class operations
+                System.out.println("Creating student 1 (Default Constructor)...");
+                Student s1 = new Student();
+                System.out.println("Student 1 No: " + s1.getStudentNo());
+                System.out.println("Student 1 Name: " + s1.getStudentName());
+                System.out.println("Student 1 DOB: " + s1.getDateOfBirth());
+                System.out.println("Student 1 Tariff: " + s1.getTariffPoints());
+
+                System.out.println("\n--- Create Student 2 (Customizable Parameters) ---");
+                input.nextLine(); // Clear buffer
+                
+                System.out.print("Enter Student Number: ");
+                String customNo = input.nextLine();
+                
+                System.out.print("Enter Student Name: ");
+                String customName = input.nextLine();
+                
+                System.out.print("Enter Date of Birth (e.g., 15th August 1996): ");
+                String customDob = input.nextLine();
+                
+                System.out.print("Enter Entry Tariff Points (20 to 280): ");
+                int customTariff = input.nextInt();
+
+                Student s2 = new Student(customNo, customName, customDob, customTariff);
+                
+                System.out.println("\nStudent 2 Details Successfully Registered:");
+                System.out.println("Student 2 No: " + s2.getStudentNo());
+                System.out.println("Student 2 Name: " + s2.getStudentName());
+                System.out.println("Student 2 DOB: " + s2.getDateOfBirth());
+                System.out.println("Student 2 Tariff: " + s2.getTariffPoints());
+
+                System.out.print("\nDo you want to change / update this student's Tariff Points? (Y/N): ");
+                char modifyChoice = input.next().charAt(0);
+                if (modifyChoice == 'Y' || modifyChoice == 'y') {
+                    System.out.print("Enter new custom Tariff Points value: ");
+                    int updatedTariff = input.nextInt();
+                    s2.setTariffPoints(updatedTariff);
+                    System.out.println("Confirmed Tariff Points updating to: " + s2.getTariffPoints());
+                }
+
+                System.out.println("\nTotal students created dynamically: " + Student.noOfStudents);
+
+            } else if (choice == 7) {
+                // Program 7: Reads data from real external emp.txt notepad database
+                String line;
+                System.out.println("Reading dynamic data from notepad (ceal.txt)...");
+                System.out.println();
+                
+                try (BufferedReader br = new BufferedReader(new FileReader("ceal.txt"))) {
+                    boolean isHeader = true;
+                    while ((line = br.readLine()) != null) {
+                        // Split line elements by comma or tab separation boundaries
+                        String[] data = line.split(",|\\t");
+                        
+// Output rows aligned properly via dynamic tab blocks
+if (data.length >= 3) {
+System.out.println(data[0] + "\t\t" + data[1] + "\t\t" + data[2]);
+}
+if (isHeader) {
+System.out.println("----------------------------------------------");
+isHeader = false;
+}
+}
+} catch (IOException e) {
+System.out.println("❌ Error: Could not find or open 'emp.txt'. Make sure the file exists in your project main folder!");
+}
+}
+System.out.print("\nDo you want to continue ? Y/N: ");
+continueChoice = input.next().charAt(0);
+} while (continueChoice == 'Y' || continueChoice == 'y');
+input.close();
+}
+}
+class Student {
+private String studentNo;
+private String studentName;
+private String dateOfBirth;
+private int tariffPoints;
+public static int noOfStudents = 0;
+public Student() {
+this.studentNo = "not known";
+this.studentName = "not known";
+this.dateOfBirth = "1st January 1995";
+this.tariffPoints = 20;
+noOfStudents++;
+}
+public Student(String studentNo, String studentName, String dateOfBirth, int tariffPoints) {
+this.studentNo = studentNo;
+this.studentName = studentName;
+this.dateOfBirth = dateOfBirth;
+setTariffPoints(tariffPoints);
+noOfStudents++;
+}
+public String getStudentNo() { return studentNo; }
+public String getStudentName() { return studentName; }
+public String getDateOfBirth() { return dateOfBirth; }
+public int getTariffPoints() { return tariffPoints; }
+public void setTariffPoints(int tariffPoints) {
+if (tariffPoints >= 20 && tariffPoints <= 280) {
+this.tariffPoints = tariffPoints;
+} else {
+System.out.println("⚠️ Warning: Entry qualifications must be between 20 and 280. Defaulting to 20.");
+this.tariffPoints = 20;
+}
+}
+public void setStudentNo(String studentNo) { this.studentNo = studentNo; }
+public void setStudentName(String studentName) { this.studentName = studentName; }
+public void setDateOfBirth(String dateOfBirth) { this.dateOfBirth = dateOfBirth; }
+}
